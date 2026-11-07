@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NTT Digital News (Prototipe)</title>
+<style>
+:root{--ink:#12262A;--muted:#4A5D61;--bg:#F2F5F4;--card:#fff;--line:#D5DFDD;--sea:#0E3B43;--amber:#7A4B00;--onsea:#fff;--chip:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#E8F0EF;--muted:#A9BDBB;--bg:#0C1A1D;--card:#13272B;--line:#244047;--sea:#082A30;--amber:#F0B44C;--onsea:#fff;--chip:#13272B}}
+:root[data-theme="dark"]{--ink:#E8F0EF;--muted:#A9BDBB;--bg:#0C1A1D;--card:#13272B;--line:#244047;--sea:#082A30;--amber:#F0B44C;--onsea:#fff;--chip:#13272B}
+*,*:before,*:after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:1rem/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1rem}
+header{background:var(--sea);color:var(--onsea);padding:1.1rem 0 1rem}
+header h1{margin:0;font:700 1.7rem/1.1 Georgia,"Times New Roman",serif}
+header p{margin:.3rem 0 0;font-size:.95rem}
+.bar{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:5;padding:.5rem 0}
+.tabs{display:flex;gap:.5rem;overflow-x:auto;padding:.2rem 0 .5rem}
+.tabs button{flex:0 0 auto;min-height:44px;padding:.35rem 1rem;border-radius:999px;border:1px solid var(--sea);background:var(--chip);color:var(--ink);font:inherit;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--sea);color:var(--onsea)}
+input{width:100%;min-height:44px;padding:.5rem .8rem;border:1px solid var(--muted);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+main{padding:1.25rem 0 2rem}
+h2{font:700 1.2rem Georgia,serif;margin:1.6rem 0 .8rem;padding-left:.6rem;border-left:5px solid var(--amber)}
+.tag{display:inline-block;align-self:flex-start;background:var(--amber);color:#fff;font-size:.82rem;padding:.1rem .65rem;border-radius:999px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tag{color:#12262A}}
+.meta{margin:0;color:var(--muted);font-size:.9rem}
+.feat{display:grid;grid-template-columns:1.2fr 1fr;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.feat img{width:100%;height:100%;object-fit:cover;display:block}
+.body{padding:1.1rem;display:flex;flex-direction:column;gap:.5rem}
+.feat h3{font:700 1.7rem/1.2 Georgia,serif;margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.card h3{font:700 1.08rem/1.3 Georgia,serif;margin:0}
+.card p{margin:0}
+.body a{color:var(--ink);font-weight:700;margin-top:auto;padding-top:.3rem}
+.none{padding:2rem;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}
+footer{background:var(--sea);color:var(--onsea);padding:1.1rem 0;font-size:.9rem}
+footer p{margin:.2rem 0}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.feat{grid-template-columns:1fr}}
+@media (max-width:600px){.grid{grid-template-columns:1fr}.feat h3{font-size:1.4rem}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script>
+const h=React.createElement,{useState}=React;
+const BERITA=[{"id": 1, "judul": "Inflasi Akhir Tahun Mengintai, Rantai Pasok NTT Diminta Dikawal", "kategori": "Lokal NTT", "tanggal": "2026-11-05", "ringkasan": "Gubernur NTT memimpin Rapat Perekonomian VIII di kantor BI NTT. Inflasi akhir tahun, antrean di SPBU, kelangkaan semen, dan lamanya bongkar muat di pelabuhan jadi sorotan, sehingga rantai pasok diminta dikawal.", "sumber": "VIVA NTT", "url": "https://ntt.viva.co.id/news/4146-inflasi-akhir-tahun-mengintai-gubernur-ntt-minta-rantai-pasok-dikawal", "utama": false}, {"id": 2, "judul": "Tour de EnTeTe 2026 Dilepas, Gubernur Minta Arena PON 2028 Dikebut", "kategori": "Olahraga", "tanggal": "2026-11-04", "ringkasan": "Gubernur NTT melepas Tour de EnTeTe 2026 di Kabupaten Malaka sambil meminta persiapan arena PON 2028 dipercepat. KONI Pusat mengingatkan arena yang belum layak bisa dipindah; fasilitas kriket di Kabupaten Kupang termasuk yang ditinjau pada Oktober 2026.", "sumber": "ANTARA", "url": "https://www.antaranews.com/berita/5831331/arena-pon-2028-bisa-dipindah-ntt-percepat-persiapan", "utama": false}, {"id": 3, "judul": "Pameran Tenun, Kuliner, dan Kopi di Kupang: BI Dorong Hak Cipta Motif Tenun", "kategori": "Budaya", "tanggal": "2026-10-04", "ringkasan": "Pada Flobamorata Creative Expo 2026 di Kupang (3 Oktober 2026), Gubernur Bank Indonesia mendorong perlindungan hak cipta motif tenun NTT agar penenun memperoleh manfaat ekonomi yang lebih besar.", "sumber": "ANTARA", "url": "https://www.antaranews.com/berita/5770970/bi-dorong-perlindungan-hak-cipta-motif-tenun-ntt", "utama": false}, {"id": 4, "judul": "Pemkot Kupang Digitalkan Retribusi dan Transaksi di Pasar", "kategori": "Teknologi", "tanggal": "2026-09-16", "ringkasan": "Pemerintah Kota Kupang menggandeng Bank Mandiri Taspen untuk mendigitalkan retribusi dan transaksi pedagang pasar, dengan tujuan memperkuat tata kelola dan transparansi penerimaan daerah.", "sumber": "ANTARA", "url": "https://www.antaranews.com/berita/5743428/pemkot-kupang-gandeng-bank-mandiri-taspen-digitalisasi-transaksi-pasar", "utama": false}, {"id": 5, "judul": "SMKN 5 Kupang: Rumah Warga Jadi Kelas Praktik lewat “Belajar Sambil Mengabdi”", "kategori": "Sekolah", "tanggal": "2026-09-10", "ringkasan": "Siswa dan guru SMK Negeri 5 Kupang melayani perbaikan gratis perangkat milik warga, mulai dari kipas angin dan televisi hingga sepeda motor dan panel surya. Program di empat program keahlian ini berjalan sejak tahun pelajaran 2026/2027 dan sudah menangani 16 pekerjaan.", "sumber": "VIVA NTT", "url": "https://ntt.viva.co.id/news/3976-saat-rumah-warga-menjadi-kelas-praktik-smkn-5-kupang-jalankan-belajar-sambil-mengabdi", "utama": true}, {"id": 6, "judul": "Kota Kupang Jadi Percontohan Digitalisasi Bansos lewat IKD", "kategori": "Teknologi", "tanggal": "2026-08-04", "ringkasan": "Pemkot Kupang mendorong penerapan Identitas Kependudukan Digital (IKD) dalam layanan publik. Kota Kupang ditetapkan sebagai salah satu lokasi percontohan digitalisasi bantuan sosial, dengan peluncuran direncanakan akhir Agustus 2026.", "sumber": "RRI Kupang", "url": "https://rri.co.id/kupang/berita-lain/2625096/kominfo-kota-kupang-dorong-kolaborasi-implementasi-ikd-perkuat-layanan-sosial", "utama": false}, {"id": 7, "judul": "Pegawai KPPN Kupang Tanam Bakau dan Bersihkan Sampah di Mangrove Oesapa", "kategori": "Lingkungan", "tanggal": "2026-02-05", "ringkasan": "Puluhan pegawai KPPN Kupang menanam bibit bakau dan memungut sampah plastik serta organik di ekosistem mangrove Oesapa, Kota Kupang, dalam rangkaian Hari Bakti Perbendaharaan ke-22.", "sumber": "KPPN Kupang (DJPb Kemenkeu)", "url": "https://djpb.kemenkeu.go.id/kppn/kupang/id/profil/189-berita/4192-penanaman-pohon-bakau-dan-kerja-bakti-corvee.html", "utama": false}];
+const KATS=["Semua", "Sekolah", "Teknologi", "Lingkungan", "Budaya", "Olahraga", "Lokal NTT"];
+const WARNA={"Sekolah": "#1D4E89", "Teknologi": "#0F766E", "Lingkungan": "#2E7D32", "Budaya": "#9A4F05", "Olahraga": "#B3261E", "Lokal NTT": "#5B3E96"};
+function gambar(k){const s='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360"><rect width="640" height="360" fill="'+WARNA[k]+'"/><circle cx="520" cy="70" r="120" fill="#fff" opacity=".09"/><circle cx="80" cy="330" r="150" fill="#fff" opacity=".09"/><text x="320" y="192" text-anchor="middle" font-family="Georgia,serif" font-size="46" font-weight="700" fill="#fff">'+k+'</text></svg>';return 'data:image/svg+xml;utf8,'+encodeURIComponent(s)}
+function tgl(i){return new Date(i+'T00:00:00').toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}
+function Meta({b}){return h('p',{className:'meta'},h('time',{dateTime:b.tanggal},tgl(b.tanggal)),' \u00b7 ',b.sumber)}
+function Link({b}){return h('a',{href:b.url,target:'_blank',rel:'noopener noreferrer'},'Baca di '+b.sumber)}
+function Featured({b}){return h('section',{className:'feat','aria-label':'Berita utama'},h('img',{src:gambar(b.kategori),alt:'Ilustrasi kategori '+b.kategori}),h('div',{className:'body'},h('span',{className:'tag'},'Berita utama: '+b.kategori),h('h3',null,b.judul),h(Meta,{b}),h('p',null,b.ringkasan),h(Link,{b})))}
+function Card({b}){return h('article',{className:'card'},h('img',{src:gambar(b.kategori),alt:'Ilustrasi kategori '+b.kategori}),h('div',{className:'body'},h('span',{className:'tag'},b.kategori),h('h3',null,b.judul),h(Meta,{b}),h('p',null,b.ringkasan),h(Link,{b})))}
+function App(){
+ const [kat,setKat]=useState('Semua');const [q,setQ]=useState('');
+ const ok=b=>(kat==='Semua'||b.kategori===kat)&&b.judul.toLowerCase().includes(q.toLowerCase());
+ const utama=BERITA.find(b=>b.utama&&ok(b));
+ const daftar=BERITA.filter(b=>!b.utama&&ok(b)).sort((a,b)=>b.tanggal.localeCompare(a.tanggal));
+ return h(React.Fragment,null,
+  h('header',null,h('div',{className:'wrap'},h('h1',null,'NTT Digital News'),h('p',null,'Kabar Kupang dan Nusa Tenggara Timur. Prototipe pembelajaran SMK Negeri 6 Kupang.'))),
+  h('div',{className:'bar'},h('div',{className:'wrap'},
+   h('nav',{'aria-label':'Kategori berita',className:'tabs'},KATS.map(k=>h('button',{key:k,onClick:()=>setKat(k),'aria-pressed':kat===k},k))),
+   h('input',{type:'search',placeholder:'Cari judul berita',value:q,onChange:e=>setQ(e.target.value),'aria-label':'Cari judul berita'}))),
+  h('main',{className:'wrap'},utama&&h(Featured,{b:utama}),
+   daftar.length?h(React.Fragment,null,h('h2',null,'Berita terbaru'),h('section',{className:'grid'},daftar.map(b=>h(Card,{key:b.id,b})))):(!utama&&h('p',{className:'none'},'Belum ada berita yang cocok. Coba kategori lain atau hapus kata kunci.'))),
+  h('footer',null,h('div',{className:'wrap'},h('p',null,'Judul dan ringkasan ditulis ulang. Hak cipta berita milik media sumber.'),h('p',null,'Data diakses 6 November 2026.'))));
+}
+ReactDOM.createRoot(document.getElementById('root')).render(h(App));
+</script>
+</body>
+</html>
